@@ -1,0 +1,213 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" %>
+
+<%@ Import Namespace="BlogEngine.Core" %>
+<% 
+    Page.Header.DataBind();
+
+    if (Security.IsAuthenticated)
+    {
+        aLoginText.InnerText = Resources.labels.admin;
+        aLogin.HRef = Utils.RelativeWebRoot + "admin/";
+    }
+    else
+    {
+        aLoginText.InnerText = Resources.labels.login;
+        aLogin.HRef = Utils.RelativeWebRoot + "Account/login.aspx?ReturnURL=" + Utils.RelativeWebRoot + "admin/";
+    }
+%>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+    <!-- Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+    <!-- Stylesheets -->
+
+    <link href="common-css/bootstrap.css" rel="stylesheet">
+
+    <link href="common-css/ionicons.css" rel="stylesheet">
+
+    <link href="common-css/layerslider.css" rel="stylesheet">
+
+    <link href="01-homepage/css/styles.css" rel="stylesheet">
+
+    <link href="01-homepage/css/responsive.css" rel="stylesheet">
+</head>
+<body class="<%=Resources.labels.LangDirection %>">
+
+    <form runat="Server">
+
+        <header>
+
+            <div class="top-menu">
+
+                <ul class="left-area welcome-area">
+                    <li class="hello-blog">Hello nice people, welcome to my blog</li>
+                    <li><a href="mailto:hieuxinhe94@gmail.com">hieuxinhe94@gmail.com</a></li>
+                </ul>
+                <!-- left-area -->
+
+                <div class="right-area">
+
+                    <div class="src-area">
+                        <form action="post">
+                            <input class="src-input" type="text" placeholder="Search">
+                            <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+                        </form>
+                    </div>
+                    <!-- src-area -->
+
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
+                        <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+                    </ul>
+                    <!-- right-area -->
+
+                </div>
+                <!-- right-area -->
+
+            </div>
+            <!-- top-menu -->
+
+            <div class="middle-menu center-text">
+                <a href="<%=Utils.AbsoluteWebRoot %>" class="logo">
+                    <img src="images/logo.png" alt="   <%=BlogSettings.Instance.Name %>">
+                </a>
+            </div>
+
+            <div class="bottom-area">
+
+                <div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+                <ul class="main-menu visible-on-click" id="main-menu">
+                    <li class="drop-down"><a href="#!">HOME<i class="ion-ios-arrow-down"></i></a>
+
+                        <ul class="drop-down-menu">
+                            <li><a href="#">FEATURED</a></li>
+                            <li><a href="#">ABOUT</a></li>
+                            <li class="drop-down"><a href="#!">CATEGORIES<i class="ion-ios-arrow-right"></i></a>
+                                <ul class="drop-down-menu drop-down-inner">
+                                    <li><a href="#">FEATURED</a></li>
+                                    <li><a href="#">ABOUT</a></li>
+                                    <li><a href="#">CATEGORIES</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li><a href="#">FEATURED</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">CATEGORIES</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+                <!-- main-menu -->
+
+            </div>
+            <!-- conatiner -->
+        </header>
+
+        <asp:ContentPlaceHolder ID="sliderPlaceHolder" runat="server" />
+
+        <!-- START CONTENT -->
+        <section class="section blog-area">
+            <div class="container">
+                <div class="row">
+
+                    <asp:ContentPlaceHolder ID="cphBody" runat="server" />
+
+                    <asp:ContentPlaceHolder ID="cphBodysidebar" runat="server" />
+        </section>
+        <!-- section -->
+
+        <div class="overlay"></div>
+
+        <!-- START FOOTER -->
+        <section class="footer-instagram-area">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="title"><b class="light-color">Follow me &copy; instagram</b></h5>
+                    </div>
+                    <!-- col-lg-4 -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+
+            <ul class="instagram">
+                <li><a href="#">
+                    <img src="/images/instragram-1-300x400.jpg" alt="Instagram Image"></a></li>
+                <li><a href="#">
+                    <img src="/images/instragram-2-300x400.jpg" alt="Instagram Image"></a></li>
+                <li><a href="#">
+                    <img src="/images/instragram-3-300x400.jpg" alt="Instagram Image"></a></li>
+                <li><a href="#">
+                    <img src="/images/instragram-4-300x400.jpg" alt="Instagram Image"></a></li>
+                <li><a href="#">
+                    <img src="/images/instragram-5-300x400.jpg" alt="Instagram Image"></a></li>
+                <li><a href="#">
+                    <img src="/images/instragram-6-300x400.jpg" alt="Instagram Image"></a></li>
+                <li><a href="#">
+                    <img src="/images/instragram-7-300x400.jpg" alt="Instagram Image"></a></li>
+            </ul>
+        </section>
+        <!-- section -->
+        <!-- END FOOTER -->
+
+        <footer>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="footer-section">
+                            <p class="copyright">&copy; <%=DateTime.Now.Year %>. All rights reserved.</p>
+                        </div>
+                        <!-- footer-section -->
+                    </div>
+                    <!-- col-lg-4 col-md-6 -->
+
+                    <div class="col-sm-6">
+                        <div class="footer-section">
+                            <ul class="social-icons">
+                                <li><a class="item-fb" data-toggle="tooltip" title="follow on Facebook" target="_blank" href="[CUSTOMFIELD|THEME|Standard|Facebook Account|#/]" rel="external nofollow"><i class="ion-social-facebook-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- footer-section -->
+                        <div class="blog-copyright mx-auto mt-3 text-center">
+                            <span><a runat="server" id="aLogin"><span id="aLoginText" runat="server"></span></a></span>
+                        </div>
+                    </div>
+                    <!-- col-lg-4 col-md-6 -->
+
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </footer>
+
+        <i class="goup fa fa-chevron-up"></i>
+        <!-- SCIPTS -->
+
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/jquery-3.1.1.min.js")%>"></script>
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/tether.min.js")%>"></script>
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/bootstrap.js")%>"></script>
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/layerslider.js")%>"></script>
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/scripts.js")%>"></script>
+    </form>
+
+    <!--- BlogEngine <%=BlogSettings.Instance.Version() %> -->
+</body>
+</html>
