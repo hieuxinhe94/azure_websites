@@ -2,7 +2,18 @@
 <page>
   <title>About</title>
   <description>write about yourself...</description>
-  <content>&lt;p&gt;2write about yourself...&lt;/p&gt;</content>
+  <content>&lt;div class="sidebar-section category-area"&gt;
+&lt;h4 class="title"&gt;&lt;strong class="light-color"&gt;Categories&lt;/strong&gt;&lt;/h4&gt;
+&lt;a class="category" href="#"&gt; &lt;img src="/admin/app/editor/images/category-1-400x150.jpg" alt="Category Image" /&gt;&lt;/a&gt;
+&lt;h6 class="name"&gt;TRAVEL&lt;/h6&gt;
+&lt;a class="category" href="#"&gt; &lt;img src="/admin/app/editor/images/category-2-400x150.jpg" alt="Category Image" /&gt;&lt;/a&gt;
+&lt;h6 class="name"&gt;FASHION&lt;/h6&gt;
+&lt;a class="category" href="#"&gt; &lt;img src="/admin/app/editor/images/category-3-400x150.jpg" alt="Category Image" /&gt;&lt;/a&gt;
+&lt;h6 class="name"&gt;LIFESTYLE&lt;/h6&gt;
+&lt;a class="category" href="#"&gt; &lt;img src="/admin/app/editor/images/category-4-400x150.jpg" alt="Category Image" /&gt;&lt;/a&gt;
+&lt;h6 class="name"&gt;DESIGN&lt;/h6&gt;
+&lt;/div&gt;
+&lt;!-- sidebar-section category-area --&gt;</content>
   <keywords />
   <slug>about</slug>
   <parent>00000000-0000-0000-0000-000000000000</parent>

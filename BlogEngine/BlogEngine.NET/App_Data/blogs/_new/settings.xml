@@ -84,7 +84,7 @@
   <showlivepreview>True</showlivepreview>
   <searchcommentlabeltext>Include comments in search</searchcommentlabeltext>
   <displaycommentsonrecentposts>True</displaycommentsonrecentposts>
-  <enablerelatedposts>True</enablerelatedposts>
+  <enablerelatedposts>False</enablerelatedposts>
   <enableenclosures>False</enableenclosures>
   <authorname>My name</authorname>
   <descriptioncharacters>300</descriptioncharacters>

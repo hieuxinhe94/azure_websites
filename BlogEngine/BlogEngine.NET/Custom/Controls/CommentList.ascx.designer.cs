@@ -58,33 +58,6 @@ namespace UserControls {
         protected global::System.Web.UI.WebControls.HiddenField hiddenReplyTo;
         
         /// <summary>
-        /// simplecaptcha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::App_Code.Controls.SimpleCaptchaControl simplecaptcha;
-        
-        /// <summary>
-        /// recaptcha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::App_Code.Controls.RecaptchaControl recaptcha;
-        
-        /// <summary>
-        /// hfCaptcha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCaptcha;
-        
-        /// <summary>
         /// lbCommentsDisabled control.
         /// </summary>
         /// <remarks>

@@ -1,39 +1,53 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="_default" CodeBehind="default.aspx.cs" %>
+
 <%@ Import Namespace="BlogEngine.Core" %>
 <%@ Register Src="Custom/Controls/PostList.ascx" TagName="PostList" TagPrefix="uc1" %>
 
 
 <asp:content id="SliderPlaceHolder" contentplaceholderid="SliderPlaceHolder" runat="Server">
+<div class="main-slider">
     <div id="slider">
-                <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:4000; transition2d:104; kenburnsscale:1.00;">
+                <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:2000; transition2d:104; kenburnsscale:1.00;">
                     <img src="images/slider-1-1600x800.jpg" class="ls-bg" alt="" />
 
                     <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
                         <a class="btn" href="#">TRAVEL</a>
-                        <h3 class="title"><b>Travel, Love, Live</b></h3>
-                        <h6>29 October, 2017</h6>
+                        <h3 class="title"><b>Ha Long</b></h3>
+                        <h6>October, 2018</h6>
                     </div>
 
                 </div>
                 <!-- ls-slide -->
 
-                <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:4000; transition2d:104; kenburnsscale:1.00;">
+                <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:2000; transition2d:104; kenburnsscale:1.00;">
                     <img src="images/slider-2-1600x800.jpg" class="ls-bg" alt="" />
 
                     <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
-                        <a class="btn" href="#">TRAVEL</a>
-                        <h3 class="title"><b>Travel, Love, Live</b></h3>
-                        <h6>29 October, 2017</h6>
+                        <a class="btn" href="#">Walking around</a>
+                        <h3 class="title"><b>Ninh Binh</b></h3>
+                        <h6>December, 2016</h6>
+                    </div>
+
+                </div>
+                <!-- ls-slide -->
+           <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:2000; transition2d:104; kenburnsscale:1.00;">
+                    <img src="images/slider-3-1600x800.jpg" class="ls-bg" alt="" />
+
+                    <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
+                        <a class="btn" href="#">Fansipan</a>
+                        <h3 class="title"><b>Trekking?, I like challenges</b></h3>
+                        <h6>December, 2017</h6>
                     </div>
 
                 </div>
                 <!-- ls-slide -->
 
             </div>
-            <!-- slider -->
+         </div>
+            <!-- slider -->
 </asp:content>
 
-<asp:content id="Content1" contentplaceholderid="cphBody" runat="Server">
+<asp:content id="cphBody" contentplaceholderid="cphBody" runat="Server">
     <div class="col-lg-8 col-md-12">
    
   <div id="divError" runat="Server" />
@@ -68,15 +82,12 @@
                                     <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
                                     <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-                                    <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
                                 </ul>
                                 <!-- right-area -->
 
-                                <h4 class="author-name"><b class="light-color">Cristine Smith</b></h4>
+                                <h4 class="author-name"><b class="light-color">Phạm Hiếu</b></h4>
                                 <p>
-                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-								dolore magnam aliquam quaerat voluptatem.
+                                    Describes section
                                 </p>
 
                                 <div class="signature-image">
@@ -114,7 +125,7 @@
                             <div class="sidebar-section latest-post-area">
                                 <h4 class="title"><b class="light-color">Latest Posts</b></h4>
 
-                                <div class="latest-post" href="#">
+                                <%--<div class="latest-post" href="#">
                                     <div class="l-post-image">
                                         <img src="images/recent-post-1-150x200.jpg" alt="Category Image"></div>
                                     <div class="post-info">
@@ -122,18 +133,18 @@
                                         <h5><a href="#"><b class="light-color">One more night in the clubs</b></a></h5>
                                         <h6 class="date"><em>Monday, October 13, 2017</em></h6>
                                     </div>
-                                </div>
+                                </div>--%>
 
                             </div>
                             <!-- sidebar-section latest-post-area -->
 
-                            <div class="sidebar-section advertisement-area">
+                           <%-- <div class="sidebar-section advertisement-area">
                                 <h4 class="title"><b class="light-color">Advertisement</b></h4>
                                 <a class="advertisement-img" href="#">
                                     <img src="images/advertise-1-400x500.jpg" alt="Advertisement Image">
                                     <h6 class="btn btn-2 discover-btn">DISCOVER</h6>
                                 </a>
-                            </div>
+                            </div>--%>
                             <!-- sidebar-section advertisement-area -->
                          </div>
                         <!-- about-author -->

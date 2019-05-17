@@ -11,7 +11,7 @@
     }
     else
     {
-        aLoginText.InnerText = Resources.labels.login;
+        //aLoginText.InnerText = Resources.labels.login;
         aLogin.HRef = Utils.RelativeWebRoot + "Account/login.aspx?ReturnURL=" + Utils.RelativeWebRoot + "admin/";
     }
 %>
@@ -55,10 +55,10 @@
                 <div class="right-area">
 
                     <div class="src-area">
-                        <form action="post">
-                            <input class="src-input" type="text" placeholder="Search">
-                            <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                        </form>
+
+                        <input class="src-input" type="text" placeholder="Search">
+                        <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+
                     </div>
                     <!-- src-area -->
 
@@ -79,7 +79,7 @@
 
             <div class="middle-menu center-text">
                 <a href="<%=Utils.AbsoluteWebRoot %>" class="logo">
-                    <img src="images/logo.png" alt="   <%=BlogSettings.Instance.Name %>">
+                    <img src="/images/logo.gif" alt=" <%=BlogSettings.Instance.Name %>">
                 </a>
             </div>
 
@@ -88,25 +88,25 @@
                 <div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 
                 <ul class="main-menu visible-on-click" id="main-menu">
-                    <li class="drop-down"><a href="#!">HOME<i class="ion-ios-arrow-down"></i></a>
+                    <li class="drop-down"><a href="#!">Technial series<i class="ion-ios-arrow-down"></i></a>
 
                         <ul class="drop-down-menu">
-                            <li><a href="#">FEATURED</a></li>
-                            <li><a href="#">ABOUT</a></li>
-                            <li class="drop-down"><a href="#!">CATEGORIES<i class="ion-ios-arrow-right"></i></a>
+                            <li><a href="#">Tips</a></li>
+                            <li><a href="#">Coding</a></li>
+                            <li class="drop-down"><a href="#!">Programing <i class="ion-ios-arrow-right"></i></a>
                                 <ul class="drop-down-menu drop-down-inner">
-                                    <li><a href="#">FEATURED</a></li>
-                                    <li><a href="#">ABOUT</a></li>
-                                    <li><a href="#">CATEGORIES</a></li>
+                                    <li><a href="#">C#</a></li>
+                                    <li><a href="#">Python</a></li>
+                                     <li><a href="#">Java</a></li>
+                                    <li><a href="#">JS</a></li>
                                 </ul>
                             </li>
                         </ul>
 
                     </li>
-                    <li><a href="#">FEATURED</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">CATEGORIES</a></li>
-                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="#"> My life- my colors</a></li>
+
+                    <li><a href="#">Contact</a></li>
                 </ul>
                 <!-- main-menu -->
 
@@ -117,13 +117,15 @@
         <asp:ContentPlaceHolder ID="sliderPlaceHolder" runat="server" />
 
         <!-- START CONTENT -->
-        <section class="section blog-area">
+        <section class="blog-area">
             <div class="container">
-                <div class="row">
+                <div class="row" style="    margin-top: 20px;">
 
                     <asp:ContentPlaceHolder ID="cphBody" runat="server" />
 
                     <asp:ContentPlaceHolder ID="cphBodysidebar" runat="server" />
+                </div>
+            </div>
         </section>
         <!-- section -->
 
@@ -149,18 +151,11 @@
                 <li><a href="#">
                     <img src="/images/instragram-2-300x400.jpg" alt="Instagram Image"></a></li>
                 <li><a href="#">
-                    <img src="/images/instragram-3-300x400.jpg" alt="Instagram Image"></a></li>
-                <li><a href="#">
                     <img src="/images/instragram-4-300x400.jpg" alt="Instagram Image"></a></li>
                 <li><a href="#">
                     <img src="/images/instragram-5-300x400.jpg" alt="Instagram Image"></a></li>
-                <li><a href="#">
-                    <img src="/images/instragram-6-300x400.jpg" alt="Instagram Image"></a></li>
-                <li><a href="#">
-                    <img src="/images/instragram-7-300x400.jpg" alt="Instagram Image"></a></li>
             </ul>
         </section>
-        <!-- section -->
         <!-- END FOOTER -->
 
         <footer>
@@ -181,8 +176,6 @@
                                 <li><a class="item-fb" data-toggle="tooltip" title="follow on Facebook" target="_blank" href="[CUSTOMFIELD|THEME|Standard|Facebook Account|#/]" rel="external nofollow"><i class="ion-social-facebook-outline"></i></a></li>
                                 <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
                                 <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
                             </ul>
                         </div>
                         <!-- footer-section -->
@@ -206,8 +199,8 @@
         <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/bootstrap.js")%>"></script>
         <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/layerslider.js")%>"></script>
         <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/scripts.js")%>"></script>
-    </form>
 
+    </form>
     <!--- BlogEngine <%=BlogSettings.Instance.Version() %> -->
 </body>
 </html>

@@ -56,6 +56,26 @@
       <avatar />
       <content>Reply from visitor2 on comment by visitor1.</content>
     </comment>
+    <comment id="2f9c3df2-7629-4a63-b380-cf5f51f1fcd1" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="False" deleted="False">
+      <date>2019-05-17 09:44:27</date>
+      <author>sdas</author>
+      <email>dsadsa</email>
+      <country />
+      <ip>::1</ip>
+      <website>http://sa/</website>
+      <avatar />
+      <content>asdsad</content>
+    </comment>
+    <comment id="b98c8817-7ee8-493c-a90d-099e5b7200ce" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="False" deleted="False">
+      <date>2019-05-17 09:46:14</date>
+      <author>sdas</author>
+      <email>dsadsa</email>
+      <country />
+      <ip>::1</ip>
+      <website>http://dsad/</website>
+      <avatar />
+      <content>sad </content>
+    </comment>
   </comments>
   <categories>
     <category>19770e74-9ec9-4cde-b2ab-e5051aaaf348</category>

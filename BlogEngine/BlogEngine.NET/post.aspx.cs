@@ -77,24 +77,24 @@ public partial class post : BlogBasePage
                     postView.Location = ServingLocation.SinglePost;
                     pwPost.Controls.Add(postView);
 
-                    // Related posts
-                    if (settings.EnableRelatedPosts)
-                    {
-                        try
-                        {
-                            // Try to load RelatedPosts view from theme folder
-                            string relatedPath = Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.GetThemeWithAdjustments(null) + "/RelatedPosts.ascx";
-                            RelatedPostsBase relatedView = (RelatedPostsBase)LoadControl(relatedPath);
-                            relatedView.PostItem = this.Post;
-                            phRelatedPosts.Controls.Add(relatedView);
-                        }
-                        catch (Exception)
-                        {
-                            // fall back to legacy code
-                            related.Visible = true;
-                            related.Item = this.Post;
-                        }
-                    }
+                    //// Related posts
+                    //if (settings.EnableRelatedPosts)
+                    //{
+                    //    try
+                    //    {
+                    //        // Try to load RelatedPosts view from theme folder
+                    //        string relatedPath = Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.GetThemeWithAdjustments(null) + "/RelatedPosts.ascx";
+                    //        RelatedPostsBase relatedView = (RelatedPostsBase)LoadControl(relatedPath);
+                    //        relatedView.PostItem = this.Post;
+                    //        phRelatedPosts.Controls.Add(relatedView);
+                    //    }
+                    //    catch (Exception)
+                    //    {
+                    //        // fall back to legacy code
+                    //        related.Visible = true;
+                    //        related.Item = this.Post;
+                    //    }
+                    //}
 
                     ucCommentList.Post = Post;
 

@@ -282,40 +282,6 @@
             var replyToCommentId = String.IsNullOrEmpty(args[8]) ? Guid.Empty : new Guid(args[8]);
             var avatar = args[9];
 
-            var recaptchaResponse = args[10];
-            var recaptchaChallenge = args[11];
-
-            var simpleCaptchaChallenge = args[12];
-
-            recaptcha.UserUniqueIdentifier = hfCaptcha.Value;
-            if (!preview && AnyCaptchaEnabled && AnyCaptchaNecessary)
-            {
-                if (ReCaptchaEnabled)
-                {
-                    if (!recaptcha.ValidateAsync(recaptchaResponse, recaptchaChallenge))
-                    {
-                        callback = "RecaptchaIncorrect";
-                        return;
-                    }
-                }
-                else
-                {
-                    simplecaptcha.Validate(simpleCaptchaChallenge);
-                    if (!simplecaptcha.IsValid)
-                    {
-                        callback = "SimpleCaptchaIncorrect";
-                        return;
-                    }
-                }
-            }
-
-            var storedCaptcha = hfCaptcha.Value;
-
-            if (sentCaptcha != storedCaptcha)
-            {
-                return;
-            }
-
             var comment = new Comment
                 {
                     Id = Guid.NewGuid(),
@@ -366,10 +332,7 @@
 
                 Post.AddComment(comment);
                 SetCookie(author, email, website, country);
-                if (ReCaptchaEnabled)
-                {
-                    recaptcha.UpdateLog(comment);
-                }
+                 
             }
 
             var path = string.Format(
@@ -487,7 +450,6 @@
             }
 
             NameInputId = $"txtName{DateTime.Now.Ticks}";
-            EnableCaptchas();
 
             if (!Page.IsPostBack && !Page.IsCallback)
             {
@@ -631,7 +593,6 @@
                 if (DisplayCommentForm)
                 {
                     GetCookie();
-                    recaptcha.UserUniqueIdentifier = hfCaptcha.Value = Guid.NewGuid().ToString();
 
                     phAddComment.Visible = true;
                     lbCommentsDisabled.Visible = false;
@@ -849,60 +810,6 @@
                 var url = string.Format("{0}#comment", Request.RawUrl.Substring(0, index));
                 Response.Redirect(url, true);
             }
-        }
-
-        /// <summary>
-        /// Enables the captchas.
-        /// </summary>
-        private void EnableCaptchas()
-        {
-            ReCaptchaEnabled = ExtensionManager.ExtensionEnabled("Recaptcha");
-            SimpleCaptchaEnabled = ExtensionManager.ExtensionEnabled("SimpleCaptcha");
-            if (ReCaptchaEnabled && SimpleCaptchaEnabled)
-            {
-                var simpleCaptchaExtension = ExtensionManager.GetExtension("SimpleCaptcha");
-                var recaptchaExtension = ExtensionManager.GetExtension("Recaptcha");
-                if (simpleCaptchaExtension.Priority < recaptchaExtension.Priority)
-                {
-                    EnableRecaptcha();
-                }
-                else
-                {
-                    EnableSimpleCaptcha();
-                }
-            }
-            else if (ReCaptchaEnabled)
-            {
-                EnableRecaptcha();
-            }
-            else if (SimpleCaptchaEnabled)
-            {
-                EnableSimpleCaptcha();
-            }
-        }
-
-        /// <summary>
-        /// Enables the recaptcha.
-        /// </summary>
-        private void EnableRecaptcha()
-        {
-            AnyCaptchaEnabled = true;
-            AnyCaptchaNecessary = recaptcha.RecaptchaNecessary;
-            recaptcha.Visible = true;
-            simplecaptcha.Visible = false;
-            SimpleCaptchaEnabled = false;
-        }
-
-        /// <summary>
-        /// Enables the simple captcha.
-        /// </summary>
-        private void EnableSimpleCaptcha()
-        {
-            AnyCaptchaEnabled = true;
-            AnyCaptchaNecessary = simplecaptcha.SimpleCaptchaNecessary;
-            simplecaptcha.Visible = true;
-            recaptcha.Visible = false;
-            ReCaptchaEnabled = false;
         }
 
         /// <summary>

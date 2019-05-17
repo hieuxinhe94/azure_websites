@@ -581,96 +581,12 @@
     <Content Include="Custom\Themes\Custom1\common-js\swiper.js" />
     <Content Include="Custom\Themes\Custom1\common-js\tether.min.js" />
     <Content Include="Custom\Themes\Custom1\fonts\ionicons.svg" />
-    <Content Include="Custom\Themes\Custom1\images\advertise-1-400x500.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\author-1-200x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\author-2-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\author-3-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-1-1000x600.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-10-600x600.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-11-1000x600.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-2-1000x600.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-3-500x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-4-500x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-5-500x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-6-500x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-7-500x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-8-1000x600.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\blog-9-600x600.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\category-1-400x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\category-2-400x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\category-3-400x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\category-4-400x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-1-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-2-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-3-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-4-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-5-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-6-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-7-300x400.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-side-1-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-side-2-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-side-3-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-side-4-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-side-5-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\instragram-side-6-150x150.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\logo.png" />
-    <Content Include="Custom\Themes\Custom1\images\recent-post-1-150x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\recent-post-2-150x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\recent-post-3-150x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\recent-post-4-150x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\recomended-1-200x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\recomended-2-200x200.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\signature-image.png" />
-    <Content Include="Custom\Themes\Custom1\images\slider-1-1600x800.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\slider-2-1600x800.jpg" />
-    <Content Include="Custom\Themes\Custom1\images\slider-3-1600x800.jpg" />
     <Content Include="Custom\Themes\Custom1\newsletter.html" />
     <Content Include="Custom\Themes\Custom1\PostNavigation.ascx" />
     <Content Include="Custom\Themes\Custom1\PostView.ascx" />
     <Content Include="Custom\Themes\Custom1\RelatedPosts.ascx" />
     <Content Include="Custom\Themes\Custom1\theme.xml" />
     <Content Include="Custom\Themes\Custom1\WidgetContainer.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\CommentForm.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\CommentView.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\newsletter.html" />
-    <Content Include="Custom\Themes\Standard-2017\PostNavigation.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\PostView.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\RelatedPosts.ascx" />
-    <Content Include="Custom\Themes\Standard-2017\src\css\bootstrap.min.css" />
-    <Content Include="Custom\Themes\Standard-2017\src\css\font-awesome.min.css" />
-    <Content Include="Custom\Themes\Standard-2017\src\css\styles.min.css" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.svg" />
-    <Content Include="Custom\Themes\Standard-2017\src\img\logo.png" />
-    <Content Include="Custom\Themes\Standard-2017\src\js\bootstrap.min.js" />
-    <Content Include="Custom\Themes\Standard-2017\src\js\custom.js" />
-    <Content Include="Custom\Themes\Standard-2017\theme.png" />
-    <Content Include="Custom\Themes\Standard-2017\theme.xml" />
-    <Content Include="Custom\Themes\Standard-2017\WidgetContainer.ascx" />
-    <Content Include="Custom\Themes\Standard\CommentForm.ascx" />
-    <Content Include="Custom\Themes\Standard\CommentView.ascx" />
-    <Content Include="Custom\Themes\Standard\newsletter.html" />
-    <Content Include="Custom\Themes\Standard\PostNavigation.ascx" />
-    <Content Include="Custom\Themes\Standard\PostView.ascx" />
-    <Content Include="Custom\Themes\Standard\RelatedPosts.ascx" />
-    <Content Include="Custom\Themes\Standard\site.master" />
-    <Content Include="Custom\Themes\Standard\src\css\bootstrap.min.css" />
-    <Content Include="Custom\Themes\Standard\src\css\font-awesome.min.css" />
-    <Content Include="Custom\Themes\Standard\src\css\styles.min.css" />
-    <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.eot" />
-    <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.svg" />
-    <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.woff" />
-    <Content Include="Custom\Themes\Standard\src\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Custom\Themes\Standard\src\fonts\FontAwesome.otf" />
-    <Content Include="Custom\Themes\Standard\src\img\logo.png" />
-    <Content Include="Custom\Themes\Standard\src\js\bootstrap.min.js" />
-    <Content Include="Custom\Themes\Standard\src\js\custom.js" />
-    <Content Include="Custom\Themes\Standard\src\js\jquery-3.2.1.min.js" />
-    <Content Include="Custom\Themes\Standard\src\js\perfect-scrollbar.min.js" />
-    <Content Include="Custom\Themes\Standard\src\js\popper.min.js" />
-    <Content Include="Custom\Themes\Standard\theme.png" />
-    <Content Include="Custom\Themes\Standard\theme.xml" />
-    <Content Include="Custom\Themes\Standard\WidgetContainer.ascx" />
     <Content Include="Custom\Widgets\Administration\screenshot.png" />
     <Content Include="Custom\Widgets\Administration\widget.xml" />
     <Content Include="Custom\Widgets\AuthorList\screenshot.png" />
@@ -721,6 +637,7 @@
     <Content Include="images\category-2-400x150.jpg" />
     <Content Include="images\category-3-400x150.jpg" />
     <Content Include="images\category-4-400x150.jpg" />
+    <Content Include="images\logo.gif" />
     <Content Include="images\instragram-1-300x400.jpg" />
     <Content Include="images\instragram-2-300x400.jpg" />
     <Content Include="images\instragram-3-300x400.jpg" />
@@ -883,13 +800,6 @@
     <Content Include="Custom\Widgets\CategoryList\edit.cshtml" />
     <Content Include="admin\themes\standard\README.md" />
     <Content Include="admin\themes\standard\scss\rtl\_rtl.widgets.scss" />
-    <Content Include="Custom\Themes\Standard-2017\site.master" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.eot" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Custom\Themes\Standard-2017\src\fonts\FontAwesome.otf" />
-    <Content Include="Custom\Themes\Standard\page.master" />
     <Content Include="Custom\Themes\Custom1\fonts\ionicons.eot" />
     <Content Include="Custom\Themes\Custom1\fonts\ionicons.ttf" />
     <Content Include="Custom\Themes\Custom1\fonts\ionicons.woff" />
@@ -1726,8 +1636,6 @@
     <Content Include="setup\upgrade\spinner.gif" />
     <Content Include="setup\upgrade\Updater.asmx" />
     <Content Include="setup\upgrade\Updater.js" />
-    <Content Include="Custom\Themes\RazorHost\page.cshtml" />
-    <Content Include="Custom\Themes\RazorHost\site.master" />
     <Content Include="setup\upgrade\index.cshtml" />
     <Content Include="Scripts\syntaxhighlighter\syntaxhighlighter.version" />
     <Content Include="setup\Web.config" />
@@ -1922,12 +1830,6 @@
     <Content Include="setup\SQL_CE\Archive\SQL_CE_UpgradeFrom2.6to3.0.sql" />
     <Content Include="setup\TestFiles\sample.png" />
     <Content Include="setup\TestFiles\sample.txt" />
-    <Content Include="Custom\Themes\RazorHost\CommentForm.ascx" />
-    <Content Include="Custom\Themes\RazorHost\CommentView.ascx" />
-    <Content Include="Custom\Themes\RazorHost\PostNavigation.ascx" />
-    <Content Include="Custom\Themes\RazorHost\PostView.ascx" />
-    <Content Include="Custom\Themes\RazorHost\RelatedPosts.ascx" />
-    <Content Include="Custom\Themes\RazorHost\WidgetContainer.ascx" />
     <Content Include="Custom\Controls\CommentList.ascx" />
     <Content Include="Custom\Controls\Defaults\CommentForm.ascx" />
     <Content Include="Custom\Controls\Defaults\PostNavigation.ascx" />
@@ -2336,13 +2238,6 @@
     </Compile>
     <Compile Include="search.aspx.designer.cs">
       <DependentUpon>search.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Custom\Themes\RazorHost\site.master.cs">
-      <DependentUpon>site.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Custom\Themes\RazorHost\site.master.designer.cs">
-      <DependentUpon>site.master</DependentUpon>
     </Compile>
     <Compile Include="Custom\Controls\CommentList.ascx.cs">
       <DependentUpon>CommentList.ascx</DependentUpon>

@@ -19,6 +19,7 @@
 
 <div class="leave-comment-area">
     <div class="leave-comment">
+        <div class="row">
         <asp:PlaceHolder runat="Server" ID="phAddComment">
             <div id="comment-form">
                 <img src="<%=Utils.RelativeWebRoot %>Content/images/blog/ajax-loader.gif" width="24" height="24" alt="Saving the comment" style="display: none" id="ajaxLoader" />
@@ -31,10 +32,9 @@
                     <a href="javascript:void(0);" onclick="BlogEngine.cancelReply();"><%=Resources.labels.cancelReply %></a>
                 </p>
                 <%} %>
-                <blog:SimpleCaptchaControl ID="simplecaptcha" runat="server" />
-                <blog:RecaptchaControl ID="recaptcha" runat="server" />
-                <asp:HiddenField runat="server" ID="hfCaptcha" />
+ 
             </div>
+
             <script type="text/javascript">
                 BlogEngine.comments.flagImage = BlogEngine.$("imgFlag");
                 BlogEngine.comments.contentBox = BlogEngine.$("txtContent");
@@ -46,10 +46,10 @@
                 BlogEngine.comments.websiteBox = BlogEngine.$("txtWebsite");
                 BlogEngine.comments.countryDropDown = BlogEngine.$("ddlCountry");
                 BlogEngine.comments.controlId = '<%=UniqueID %>';
-                BlogEngine.comments.captchaField = BlogEngine.$('<%=hfCaptcha.ClientID %>');
                 BlogEngine.comments.replyToId = BlogEngine.$("<%=hiddenReplyTo.ClientID %>");
             </script>
         </asp:PlaceHolder>
+            </div><!-- row -->
     </div>
     <!-- leave-comment -->
 

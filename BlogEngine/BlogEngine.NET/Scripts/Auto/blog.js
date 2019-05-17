@@ -3,14 +3,14 @@ BlogEngine = {
     $: function (id) {
         return document.getElementById(id);
     }
-	,
+    ,
     setFlag: function (iso) {
         if (iso.length > 0)
             BlogEngine.comments.flagImage.src = BlogEngineRes.webRoot + "Content/images/blog/flags/" + iso + ".png";
         else
             BlogEngine.comments.flagImage.src = BlogEngineRes.webRoot + "Content/images/blog/pixel.gif";
     }
-	,
+    ,
 
     // Shows the preview of the comment
     showCommentPreview: function () {
@@ -26,7 +26,7 @@ BlogEngine = {
         this.addComment(true);
         return false;
     }
-	,
+    ,
     composeComment: function () {
         var oPreview = this.$('preview');
         var oCompose = this.$('compose');
@@ -41,13 +41,13 @@ BlogEngine = {
         }
         return false;
     }
-	,
+    ,
     endShowPreview: function (arg, context) {
         if (BlogEngine.$('commentPreview')) {
             BlogEngine.$('commentPreview').innerHTML = arg;
         }
     }
-	,
+    ,
     toggleCommentSavingIndicators: function (bSaving) {
         BlogEngine.$("btnSaveAjax").disabled = bSaving;
         BlogEngine.$("ajaxLoader").style.display = bSaving ? "inline" : "none";
@@ -80,7 +80,7 @@ BlogEngine = {
 
         alert("Sorry, the following error occurred while processing your comment:\n\n" + error);
     }
-	,
+    ,
     addComment: function (preview) {
         var isPreview = preview == true;
         if (!isPreview) {
@@ -90,27 +90,18 @@ BlogEngine = {
         var author = BlogEngine.comments.nameBox.value;
         var email = BlogEngine.comments.emailBox.value;
         var content = BlogEngine.comments.contentBox.value;
-        var captcha = BlogEngine.comments.captchaField.value;
+
 
         var website = BlogEngine.comments.websiteBox ? BlogEngine.comments.websiteBox.value : "";
         var country = BlogEngine.comments.countryDropDown ? BlogEngine.comments.countryDropDown.value : "";
         var notify = BlogEngine.$("cbNotify") ? BlogEngine.$("cbNotify").checked : false;
         var replyToId = BlogEngine.comments.replyToId ? BlogEngine.comments.replyToId.value : "";
 
-        var recaptchaResponseField = document.getElementById('recaptcha_response_field');
-        var recaptchaResponse = recaptchaResponseField ? recaptchaResponseField.value : "";
-
-        var recaptchaChallengeField = document.getElementById('recaptcha_challenge_field');
-        var recaptchaChallenge = recaptchaChallengeField ? recaptchaChallengeField.value : "";
-
-        var simpleCaptchaChallengeField = document.getElementById('simpleCaptchaValue');
-        var simpleCaptchaChallenge = simpleCaptchaChallengeField ? simpleCaptchaChallengeField.value : "";
-
         var avatarInput = BlogEngine.$("avatarImgSrc");
         var avatar = (avatarInput && avatarInput.value) ? avatarInput.value : "";
 
         var callback = isPreview ? BlogEngine.endShowPreview : BlogEngine.appendComment;
-        var argument = author + "-|-" + email + "-|-" + website + "-|-" + country + "-|-" + content + "-|-" + notify + "-|-" + isPreview + "-|-" + captcha + "-|-" + replyToId + "-|-" + avatar + "-|-" + recaptchaResponse + "-|-" + recaptchaChallenge + "-|-" + simpleCaptchaChallenge;
+        var argument = author + "-|-" + email + "-|-" + website + "-|-" + country + "-|-" + content + "-|-" + notify + "-|-" + isPreview + "-|-" + '' + "-|-" + replyToId + "-|-" + avatar + "-|-" + '' + "-|-" + '' + "-|-" + '';
 
         WebForm_DoCallback(BlogEngine.comments.controlId, argument, callback, 'comment', BlogEngine.onCommentError, false);
 
@@ -121,7 +112,7 @@ BlogEngine = {
     cancelReply: function () {
         this.replyToComment('');
     }
-	,
+    ,
     replyToComment: function (id) {
 
         // set hidden value
@@ -156,65 +147,52 @@ BlogEngine = {
 
         BlogEngine.comments.nameBox.focus();
     }
-	,
+    ,
     appendComment: function (args, context) {
-        if (context == "comment") {
+        if (context === "comment") {
 
-            if (document.getElementById('recaptcha_response_field')) {
-                Recaptcha.reload();
+            var commentList = BlogEngine.$("commentlist");
+
+            if (commentList !== null) {
+
+            commentList.innerHTML = "<h1 id='comment'>" + BlogEngineRes.i18n.comments + "</h1>"
+
+            // add comment html to the right place
+            var id = BlogEngine.comments.replyToId ? BlogEngine.comments.replyToId.value : '';
+
+            if (id !== '') {
+                var replies = BlogEngine.$('replies_' + id);
+                replies.innerHTML += args;
+            } else {
+                commentList.innerHTML += args;
+                commentList.style.display = 'block';
             }
-            if (document.getElementById("spnSimpleCaptchaIncorrect")) document.getElementById("spnSimpleCaptchaIncorrect").style.display = "none";
 
-            if (args == "RecaptchaIncorrect" || args == "SimpleCaptchaIncorrect") {
-                if (document.getElementById("spnCaptchaIncorrect")) document.getElementById("spnCaptchaIncorrect").style.display = "";
-                if (document.getElementById("spnSimpleCaptchaIncorrect")) document.getElementById("spnSimpleCaptchaIncorrect").style.display = "";
-                BlogEngine.toggleCommentSavingIndicators(false);
-            }
-            else {
+            // reset form values
+            BlogEngine.comments.contentBox.value = "";
+            BlogEngine.comments.contentBox = BlogEngine.$(BlogEngine.comments.contentBox.id);
+            BlogEngine.toggleCommentSavingIndicators(false);
+            BlogEngine.$("status").className = "success";
 
+            if (!BlogEngine.comments.moderation)
+                BlogEngine.$("status").innerHTML = BlogEngineRes.i18n.commentWasSaved;
+            else
+                BlogEngine.$("status").innerHTML = BlogEngineRes.i18n.commentWaitingModeration;
 
-                if (document.getElementById("spnCaptchaIncorrect")) document.getElementById("spnCaptchaIncorrect").style.display = "none";
-                if (document.getElementById("spnSimpleCaptchaIncorrect")) document.getElementById("spnSimpleCaptchaIncorrect").style.display = "none";
+            // move form back to bottom
+            var commentForm = BlogEngine.$('comment-form');
+            commentList.appendChild(commentForm);
+            // reset reply to
+            if (BlogEngine.comments.replyToId) BlogEngine.comments.replyToId.value = '';
+            if (BlogEngine.$('cancelReply')) BlogEngine.$('cancelReply').style.display = 'none';
 
-                var commentList = BlogEngine.$("commentlist");
-                if (commentList.innerHTML.length < 10)
-                    commentList.innerHTML = "<h1 id='comment'>" + BlogEngineRes.i18n.comments + "</h1>"
+        }
 
-                // add comment html to the right place
-                var id = BlogEngine.comments.replyToId ? BlogEngine.comments.replyToId.value : '';
-
-                if (id != '') {
-                    var replies = BlogEngine.$('replies_' + id);
-                    replies.innerHTML += args;
-                } else {
-                    commentList.innerHTML += args;
-                    commentList.style.display = 'block';
-                }
-
-                // reset form values
-                BlogEngine.comments.contentBox.value = "";
-                BlogEngine.comments.contentBox = BlogEngine.$(BlogEngine.comments.contentBox.id);
-                BlogEngine.toggleCommentSavingIndicators(false);
-                BlogEngine.$("status").className = "success";
-
-                if (!BlogEngine.comments.moderation)
-                    BlogEngine.$("status").innerHTML = BlogEngineRes.i18n.commentWasSaved;
-                else
-                    BlogEngine.$("status").innerHTML = BlogEngineRes.i18n.commentWaitingModeration;
-
-                // move form back to bottom
-                var commentForm = BlogEngine.$('comment-form');
-                commentList.appendChild(commentForm);
-                // reset reply to
-                if (BlogEngine.comments.replyToId) BlogEngine.comments.replyToId.value = '';
-                if (BlogEngine.$('cancelReply')) BlogEngine.$('cancelReply').style.display = 'none';
-
-            }
         }
 
         BlogEngine.$("btnSaveAjax").disabled = false;
     }
-	,
+    ,
     validateAndSubmitCommentForm: function () {
 
         if (BlogEngine.comments.nameBox.value.length < 1) {
@@ -257,7 +235,7 @@ BlogEngine = {
         return true;
     }
 
-	 ,
+    ,
 
     addBbCode: function (v) {
         try {
@@ -282,7 +260,7 @@ BlogEngine = {
 
         return;
     }
-	,
+    ,
     // Searches the blog based on the entered text and
     // searches comments as well if chosen.
     search: function (root, searchfield) {
@@ -301,7 +279,7 @@ BlogEngine = {
 
         return false;
     }
-	,
+    ,
     // Clears the search fields on focus.
     searchClear: function (defaultText, searchfield) {
         if (!searchfield) {
@@ -313,11 +291,11 @@ BlogEngine = {
         else if (input.value == "")
             input.value = defaultText;
     }
-	,
+    ,
     rate: function (blogId, id, rating) {
         this.createCallback("rating.axd?id=" + id + "&rating=" + rating, BlogEngine.ratingCallback, blogId);
     }
-	,
+    ,
     ratingCallback: function (response) {
         var rating = response.substring(0, 1);
         var status = response.substring(1);
@@ -335,7 +313,7 @@ BlogEngine = {
             alert("An error occured while registering your rating. Please try again");
         }
     }
-	,
+    ,
     /// <summary>
     /// Creates a client callback back to the requesting page
     /// and calls the callback method with the response as parameter.
@@ -357,7 +335,7 @@ BlogEngine = {
 
         http.send(null);
     }
-	,
+    ,
     /// <summary>
     /// Creates a XmlHttpRequest object.
     /// </summary>
@@ -377,14 +355,14 @@ BlogEngine = {
 
         return false;
     }
-	,
+    ,
     // Updates the calendar from client-callback
     updateCalendar: function (args, context) {
         var cal = BlogEngine.$('calendarContainer');
         cal.innerHTML = args;
         BlogEngine.Calendar.months[context] = args;
     }
-	,
+    ,
     toggleMonth: function (year) {
         var monthList = BlogEngine.$("monthList");
         var years = monthList.getElementsByTagName("ul");
@@ -396,23 +374,23 @@ BlogEngine = {
             }
         }
     }
-	,
+    ,
     // Adds a trim method to all strings.
     equal: function (first, second) {
         var f = first.toLowerCase().replace(new RegExp(' ', 'gi'), '');
         var s = second.toLowerCase().replace(new RegExp(' ', 'gi'), '');
         return f == s;
     }
-	,
+    ,
     /*-----------------------------------------------------------------------------
     XFN HIGHLIGHTER
     -----------------------------------------------------------------------------*/
     xfnRelationships: ['friend', 'acquaintance', 'contact', 'met'
-										, 'co-worker', 'colleague', 'co-resident'
-										, 'neighbor', 'child', 'parent', 'sibling'
-										, 'spouse', 'kin', 'muse', 'crush', 'date'
-										, 'sweetheart', 'me']
-	,
+        , 'co-worker', 'colleague', 'co-resident'
+        , 'neighbor', 'child', 'parent', 'sibling'
+        , 'spouse', 'kin', 'muse', 'crush', 'date'
+        , 'sweetheart', 'me']
+    ,
     // Applies the XFN tags of a link to the title tag
     hightLightXfn: function () {
         var content = BlogEngine.$('content');
@@ -433,7 +411,7 @@ BlogEngine = {
             }
         }
     }
-	,
+    ,
 
     showRating: function (container, id, raters, rating, blogId) {
         var div = document.createElement('div');
@@ -479,7 +457,7 @@ BlogEngine = {
         container.appendChild(div);
         container.style.visibility = 'visible';
     }
-	,
+    ,
 
     applyRatings: function () {
         var divs = document.getElementsByTagName('div');
@@ -506,7 +484,7 @@ BlogEngine = {
 
         return 'five-stars';
     }
-	,
+    ,
     // Adds event to window.onload without overwriting currently assigned onload functions.
     // Function found at Simon Willison's weblog - http://simon.incutio.com/
     addLoadEvent: function (func) {
@@ -521,7 +499,7 @@ BlogEngine = {
             }
         }
     }
-	,
+    ,
     filterByAPML: function () {
         var width = document.documentElement.clientWidth + document.documentElement.scrollLeft;
         var height = document.documentElement.clientHeight + document.documentElement.scrollTop;
@@ -590,7 +568,7 @@ BlogEngine = {
         a.onclick = function () { document.body.removeChild(BlogEngine.$('layer')); document.body.removeChild(BlogEngine.$('apmlfilter')); document.body.style.position = ''; };
         div.appendChild(a);
     }
-	,
+    ,
     getCookieValue: function (name) {
         var cookie = new String(document.cookie);
 
@@ -607,7 +585,7 @@ BlogEngine = {
     test: function () {
         alert('test');
     }
-	,
+    ,
     comments: {
         flagImage: null,
         contentBox: null,
