@@ -5,46 +5,37 @@
 
 
 <asp:content id="SliderPlaceHolder" contentplaceholderid="SliderPlaceHolder" runat="Server">
-<div class="main-slider">
+<div class="main-slider">
+
     <div id="slider">
-                <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:2000; transition2d:104; kenburnsscale:1.00;">
-                    <img src="images/slider-1-1600x800.jpg" class="ls-bg" alt="" />
-
-                    <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
-                        <a class="btn" href="#">TRAVEL</a>
-                        <h3 class="title"><b>Ha Long</b></h3>
-                        <h6>October, 2018</h6>
-                    </div>
-
+        <%string imgSrc = ""; %>
+        <% foreach (var slidePost in Post.GetPostsByCategory("SLIDES"))
+            {%>
+          <%imgSrc = Post.FindFirstImgWithRegex(slidePost.Content);  %>
+        
+     
+         <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:4000; transition2d:104; kenburnsscale:1.00;">
+             <% if (!string.IsNullOrEmpty(imgSrc))
+                 { %> 
+                <img src="<%=imgSrc %>" class="ls-bg" alt="" >
+                     
+                 <% }
+                     else
+                     { %>              
+                            <img src="images/slider-1-1600x800.jpg" class="ls-bg" alt="" /><%} %> 
+                            <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
+                                <a class="btn" href="#"><%=string.Join(",", slidePost.Tags.ToArray())  %></a>
+                                <h3 class="title"><b><%=slidePost.Title %></b></h3>
+                                <h6><%=slidePost.DateCreated %></h6>
+                            </div>
+                        </div>
+            <%} %>
                 </div>
                 <!-- ls-slide -->
-
-                <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:2000; transition2d:104; kenburnsscale:1.00;">
-                    <img src="images/slider-2-1600x800.jpg" class="ls-bg" alt="" />
-
-                    <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
-                        <a class="btn" href="#">Walking around</a>
-                        <h3 class="title"><b>Ninh Binh</b></h3>
-                        <h6>December, 2016</h6>
-                    </div>
-
-                </div>
-                <!-- ls-slide -->
-           <div class="ls-slide" data-ls="bgsize:cover; bgposition:50% 50%; duration:2000; transition2d:104; kenburnsscale:1.00;">
-                    <img src="images/slider-3-1600x800.jpg" class="ls-bg" alt="" />
-
-                    <div class="slider-content ls-l" style="top: 60%; left: 30%;" data-ls="offsetyin:100%; offsetxout:-50%; durationin:800; delayin:100; durationout:400; parallaxlevel:0;">
-                        <a class="btn" href="#">Fansipan</a>
-                        <h3 class="title"><b>Trekking?, I like challenges</b></h3>
-                        <h6>December, 2017</h6>
-                    </div>
-
-                </div>
-                <!-- ls-slide -->
-
             </div>
          </div>
-            <!-- slider -->
+            <!-- slider -->
+
 </asp:content>
 
 <asp:content id="cphBody" contentplaceholderid="cphBody" runat="Server">
@@ -91,7 +82,6 @@
                                 </p>
 
                                 <div class="signature-image">
-                                    <img src="images/signature-image.png" alt="Signature Image"></div>
                                 <a class="read-more-link" href="#"><b>READ MORE</b></a>
 
                             </div>
@@ -118,24 +108,32 @@
 
                             <div class="sidebar-section category-area">
                                 <h4 class="title"><b class="light-color">Categories</b></h4>
+                               
                                 <%--<blog:WidgetZone ID="WidgetZone2" runat="server" ZoneName="sidebar Post" />--%>
                             </div>
                             <!-- sidebar-section category-area -->
 
                             <div class="sidebar-section latest-post-area">
                                 <h4 class="title"><b class="light-color">Latest Posts</b></h4>
-
-                                <%--<div class="latest-post" href="#">
+                                    
+                                 <% foreach (var item in Post.GetLastestPost())
+                                     {%>
+                                        <div class="latest-post" href="<%=item.Id%>">
                                     <div class="l-post-image">
-                                        <img src="images/recent-post-1-150x200.jpg" alt="Category Image"></div>
+                                         <img alt="category image" src="<%=FindFirstImgWithRegex(item.Content) %>" class="ls-bg" alt="" >
+                                           </div>
                                     <div class="post-info">
-                                        <a class="btn category-btn" href="#">TRAVEL</a>
-                                        <h5><a href="#"><b class="light-color">One more night in the clubs</b></a></h5>
-                                        <h6 class="date"><em>Monday, October 13, 2017</em></h6>
+                                      
+                                        <h6><a href="#"><b class="light-color"><%=item.Title %></b></a></h6>
+                                        <h6 class="date"><em><%=item.DateCreated.ToString("dd-MM-yyyy") %></em></h6>
                                     </div>
-                                </div>--%>
+                         
+                                  </div>
+                                     <%} %>
+                           
 
-                            </div>
+
+                          
                             <!-- sidebar-section latest-post-area -->
 
                            <%-- <div class="sidebar-section advertisement-area">

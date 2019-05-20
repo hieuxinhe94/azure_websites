@@ -40,24 +40,6 @@ namespace UserControls {
         protected global::System.Web.UI.WebControls.PlaceHolder phAddComment;
         
         /// <summary>
-        /// phCommentForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phCommentForm;
-        
-        /// <summary>
-        /// hiddenReplyTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenReplyTo;
-        
-        /// <summary>
         /// lbCommentsDisabled control.
         /// </summary>
         /// <remarks>

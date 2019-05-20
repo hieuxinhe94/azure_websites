@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>Admin</author>
+  <title>Test slider title</title>
+  <description>Test description slider 1</description>
+  <content>&lt;p&gt;&lt;img src="/image.axd?picture=/44023737_1494342287376961_2812012820672020480_o.jpg" alt="" /&gt;&lt;/p&gt;</content>
+  <ispublished>False</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>False</iscommentsenabled>
+  <pubDate>2019-05-18 17:02:00</pubDate>
+  <lastModified>2019-05-18 17:03:48</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>test-slider-title</slug>
+  <tags />
+  <comments />
+  <categories>
+    <category>1f3e51b0-51f4-40cd-aed5-a670d4486264</category>
+  </categories>
+  <notifications />
+</post>

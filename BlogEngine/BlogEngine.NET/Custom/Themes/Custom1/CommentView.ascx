@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" EnableViewState="False" Inherits="BlogEngine.Core.Web.Controls.CommentViewBase" %>
-<div class="comments-area">
+<%--<div class="comments-area">
 
     <ul id="id_<%=Comment.Id %>">
         <li class="comment-item">
@@ -25,5 +25,5 @@
         </li>
     </ul>
 
-</div>
+</div>--%>
 <!-- comments-area -->

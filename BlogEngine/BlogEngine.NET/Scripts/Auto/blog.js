@@ -82,7 +82,7 @@ BlogEngine = {
     }
     ,
     addComment: function (preview) {
-        var isPreview = preview == true;
+        var isPreview = preview == false;
         if (!isPreview) {
             BlogEngine.toggleCommentSavingIndicators(true);
             this.$("status").innerHTML = BlogEngineRes.i18n.savingTheComment;

@@ -443,204 +443,204 @@
             base.OnLoad(e);
             bool isOdd = true;
 
-            if (Post == null)
-            {
-                Response.Redirect(Utils.RelativeWebRoot);
-                return;
-            }
+            //if (Post == null)
+            //{
+            //    Response.Redirect(Utils.RelativeWebRoot);
+            //    return;
+            //}
 
-            NameInputId = $"txtName{DateTime.Now.Ticks}";
+            //NameInputId = $"txtName{DateTime.Now.Ticks}";
 
-            if (!Page.IsPostBack && !Page.IsCallback)
-            {
-                if (Security.IsAuthorizedTo(Rights.ModerateComments))
-                {
-                    if (Request.QueryString["deletecomment"] != null)
-                    {
-                        DeleteComment();
-                    }
+            //if (!Page.IsPostBack && !Page.IsCallback)
+            //{
+            //    if (Security.IsAuthorizedTo(Rights.ModerateComments))
+            //    {
+            //        if (Request.QueryString["deletecomment"] != null)
+            //        {
+            //            DeleteComment();
+            //        }
 
-                    else if (Request.QueryString["deletecommentandchildren"] != null)
-                    {
-                        DeleteCommentAndChildren();
-                    }
+            //        else if (Request.QueryString["deletecommentandchildren"] != null)
+            //        {
+            //            DeleteCommentAndChildren();
+            //        }
 
-                    else if (!string.IsNullOrEmpty(Request.QueryString["approvecomment"]))
-                    {
-                        ApproveComment();
-                    }
+            //        else if (!string.IsNullOrEmpty(Request.QueryString["approvecomment"]))
+            //        {
+            //            ApproveComment();
+            //        }
 
-                    else if (!string.IsNullOrEmpty(Request.QueryString["approveallcomments"]))
-                    {
-                        ApproveAllComments();
-                    }
-                }
+            //        else if (!string.IsNullOrEmpty(Request.QueryString["approveallcomments"]))
+            //        {
+            //            ApproveAllComments();
+            //        }
+            //    }
 
-                var path = string.Format(
-                    "{0}Custom/Themes/{1}/CommentView.ascx", Utils.ApplicationRelativeWebRoot, BlogSettings.Instance.GetThemeWithAdjustments(null));
+            //    var path = string.Format(
+            //        "{0}Custom/Themes/{1}/CommentView.ascx", Utils.ApplicationRelativeWebRoot, BlogSettings.Instance.GetThemeWithAdjustments(null));
 
-                if (!File.Exists(Server.MapPath(path)))
-                    path = string.Format("{0}Custom/Controls/Defaults/CommentView.ascx", Utils.ApplicationRelativeWebRoot);
+            //    if (!File.Exists(Server.MapPath(path)))
+            //        path = string.Format("{0}Custom/Controls/Defaults/CommentView.ascx", Utils.ApplicationRelativeWebRoot);
 
-                bool canViewUnpublishedPosts = Security.IsAuthorizedTo(AuthorizationCheck.HasAny, new[] { Rights.ViewUnmoderatedComments, Rights.ModerateComments });
+            //    bool canViewUnpublishedPosts = Security.IsAuthorizedTo(AuthorizationCheck.HasAny, new[] { Rights.ViewUnmoderatedComments, Rights.ModerateComments });
 
-                if (NestingSupported)
-                {
-                    // newer, nested comments
-                    if (Post != null)
-                    {
-                        AddNestedComments(path, Post.NestedComments, phComments, canViewUnpublishedPosts);
-                    }
-                }
-                else
-                {
-                    // old, non nested code
-                    // Add approved Comments
+            //    if (NestingSupported)
+            //    {
+            //        // newer, nested comments
+            //        if (Post != null)
+            //        {
+            //            AddNestedComments(path, Post.NestedComments, phComments, canViewUnpublishedPosts);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // old, non nested code
+            //        // Add approved Comments
 
-                    isOdd = true;
+            //        isOdd = true;
 
-                    foreach (var comment in
-                        Post.Comments.Where(
-                            comment => comment.Email != "pingback" && comment.Email != "trackback"))
-                    {
-                        if (comment.IsApproved)
-                        {
-                            CommentCounter++;
-                        }
+            //        foreach (var comment in
+            //            Post.Comments.Where(
+            //                comment => comment.Email != "pingback" && comment.Email != "trackback"))
+            //        {
+            //            if (comment.IsApproved)
+            //            {
+            //                CommentCounter++;
+            //            }
 
-                        if (!comment.IsApproved && BlogSettings.Instance.EnableCommentsModeration)
-                        {
-                            continue;
-                        }
+            //            if (!comment.IsApproved && BlogSettings.Instance.EnableCommentsModeration)
+            //            {
+            //                continue;
+            //            }
 
-                        isOdd = !isOdd;
-                        var control = (CommentViewBase)LoadControl(path);
-                        control.Comment = comment;
-                        control.Post = Post;
-                        control.IsOdd = isOdd;
-                        phComments.Controls.Add(control);
-                    }
+            //            isOdd = !isOdd;
+            //            var control = (CommentViewBase)LoadControl(path);
+            //            control.Comment = comment;
+            //            control.Post = Post;
+            //            control.IsOdd = isOdd;
+            //            phComments.Controls.Add(control);
+            //        }
 
-                    // Add unapproved comments
-                    if (canViewUnpublishedPosts)
-                    {
-                        foreach (var comment in Post.Comments)
-                        {
-                            if (comment.Email == "pingback" || comment.Email == "trackback")
-                            {
-                                continue;
-                            }
+            //        // Add unapproved comments
+            //        if (canViewUnpublishedPosts)
+            //        {
+            //            foreach (var comment in Post.Comments)
+            //            {
+            //                if (comment.Email == "pingback" || comment.Email == "trackback")
+            //                {
+            //                    continue;
+            //                }
 
-                            if (comment.IsApproved)
-                            {
-                                continue;
-                            }
+            //                if (comment.IsApproved)
+            //                {
+            //                    continue;
+            //                }
 
-                            isOdd = !isOdd;
-                            var control = (CommentViewBase)LoadControl(path);
-                            control.Comment = comment;
-                            control.Post = Post;
-                            control.IsOdd = isOdd;
-                            phComments.Controls.Add(control);
-                        }
-                    }
-                }
+            //                isOdd = !isOdd;
+            //                var control = (CommentViewBase)LoadControl(path);
+            //                control.Comment = comment;
+            //                control.Post = Post;
+            //                control.IsOdd = isOdd;
+            //                phComments.Controls.Add(control);
+            //            }
+            //        }
+            //    }
 
-                var pingbacks = new List<CommentViewBase>();
+            //    var pingbacks = new List<CommentViewBase>();
 
-                isOdd = true;
-                foreach (var comment in Post.Comments)
-                {
-                    var control = (CommentViewBase)LoadControl(path);
+            //    isOdd = true;
+            //    foreach (var comment in Post.Comments)
+            //    {
+            //        var control = (CommentViewBase)LoadControl(path);
 
-                    if (comment.Email != "pingback" && comment.Email != "trackback")
-                    {
-                        continue;
-                    }
+            //        if (comment.Email != "pingback" && comment.Email != "trackback")
+            //        {
+            //            continue;
+            //        }
 
-                    isOdd = !isOdd;
-                    control.Comment = comment;
-                    control.Post = Post;
-                    control.IsOdd = isOdd;
-                    pingbacks.Add(control);
-                }
+            //        isOdd = !isOdd;
+            //        control.Comment = comment;
+            //        control.Post = Post;
+            //        control.IsOdd = isOdd;
+            //        pingbacks.Add(control);
+            //    }
 
-                if (pingbacks.Count > 0)
-                {
-                    var litTrackback = new Literal();
-                    var sb = new StringBuilder();
-                    sb.AppendFormat("<h3 id=\"trackbackheader\">Pingbacks and trackbacks ({0})", pingbacks.Count);
-                    sb.Append(
-                        "<a id=\"trackbacktoggle\" style=\"float:right;width:20px;height:20px;border:1px solid #ccc;text-decoration:none;text-align:center\"");
-                    sb.Append(" href=\"javascript:toggle_visibility('trackbacks','trackbacktoggle');\">+</a>");
-                    sb.Append("</h3><div id=\"trackbacks\" style=\"display:none\">");
-                    litTrackback.Text = sb.ToString();
-                    phTrckbacks.Controls.Add(litTrackback);
+            //    if (pingbacks.Count > 0)
+            //    {
+            //        var litTrackback = new Literal();
+            //        var sb = new StringBuilder();
+            //        sb.AppendFormat("<h3 id=\"trackbackheader\">Pingbacks and trackbacks ({0})", pingbacks.Count);
+            //        sb.Append(
+            //            "<a id=\"trackbacktoggle\" style=\"float:right;width:20px;height:20px;border:1px solid #ccc;text-decoration:none;text-align:center\"");
+            //        sb.Append(" href=\"javascript:toggle_visibility('trackbacks','trackbacktoggle');\">+</a>");
+            //        sb.Append("</h3><div id=\"trackbacks\" style=\"display:none\">");
+            //        litTrackback.Text = sb.ToString();
+            //        phTrckbacks.Controls.Add(litTrackback);
 
-                    foreach (var c in pingbacks)
-                    {
-                        phTrckbacks.Controls.Add(c);
-                    }
+            //        foreach (var c in pingbacks)
+            //        {
+            //            phTrckbacks.Controls.Add(c);
+            //        }
 
-                    var closingDiv = new Literal { Text = @"</div>" };
-                    phTrckbacks.Controls.Add(closingDiv);
-                }
-                else
-                {
-                    phTrckbacks.Visible = false;
-                }
+            //        var closingDiv = new Literal { Text = @"</div>" };
+            //        phTrckbacks.Controls.Add(closingDiv);
+            //    }
+            //    else
+            //    {
+            //        phTrckbacks.Visible = false;
+            //    }
 
-                if (DisplayCommentForm)
-                {
-                    GetCookie();
+            //    if (DisplayCommentForm)
+            //    {
+            //        GetCookie();
 
-                    phAddComment.Visible = true;
-                    lbCommentsDisabled.Visible = false;
-                    LoadCommentForm();
-                }
-                else
-                {
-                    phAddComment.Visible = false;
-                    lbCommentsDisabled.Visible = true;
-                }
-            }
+            //        phAddComment.Visible = true;
+            //        lbCommentsDisabled.Visible = false;
+            //        //LoadCommentForm();
+            //    }
+            //    else
+            //    {
+            //        phAddComment.Visible = false;
+            //        lbCommentsDisabled.Visible = true;
+            //    }
+            //}
 
-            Page.ClientScript.GetCallbackEventReference(this, "arg", null, string.Empty);
+            //Page.ClientScript.GetCallbackEventReference(this, "arg", null, string.Empty);
         }
 
-        private void LoadCommentForm()
-        {
-            string path = FromThemeFolder("CommentForm.ascx");
-            if (!File.Exists(Server.MapPath(path)))
-            {
-                path = Utils.ApplicationRelativeWebRoot + "Custom/Controls/Defaults/CommentForm.ascx";
-            }
+        //private void LoadCommentForm()
+        //{
+        //    string path = FromThemeFolder("CommentForm.ascx");
+        //    if (!File.Exists(Server.MapPath(path)))
+        //    {
+        //        path = Utils.ApplicationRelativeWebRoot + "Custom/Controls/Defaults/CommentForm.ascx";
+        //    }
 
-            try
-            {
-                CommentFormBase formView = (CommentFormBase)LoadControl(path);
-                formView.PostItem = this.Post;
-                phCommentForm.Controls.Add(formView);
-            }
-            catch (Exception ex)
-            {
-                Utils.Log("Error adding comment form to CommentView", ex);
-            }
-        }
+        //    try
+        //    {
+        //        CommentFormBase formView = (CommentFormBase)LoadControl(path);
+        //        formView.PostItem = this.Post;
+        //        phCommentForm.Controls.Add(formView);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Utils.Log("Error adding comment form to CommentView", ex);
+        //    }
+        //}
 
-        private void AddFormToCommentView(string path)
-        {
-            try
-            {
-                CommentFormBase formView = (CommentFormBase)LoadControl(path);
-                formView.PostItem = this.Post;
-                phCommentForm.Controls.Add(formView);
-            }
-            catch (Exception ex)
-            {
-                Utils.Log("AddFormToCommentView", ex);
-            }
-        }
+        //private void AddFormToCommentView(string path)
+        //{
+        //    try
+        //    {
+        //        CommentFormBase formView = (CommentFormBase)LoadControl(path);
+        //        formView.PostItem = this.Post;
+        //        //phCommentForm.Controls.Add(formView);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Utils.Log("AddFormToCommentView", ex);
+        //    }
+        //}
 
         private string FromThemeFolder(string file)
         {

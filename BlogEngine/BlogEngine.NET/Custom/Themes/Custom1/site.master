@@ -14,6 +14,9 @@
         //aLoginText.InnerText = Resources.labels.login;
         aLogin.HRef = Utils.RelativeWebRoot + "Account/login.aspx?ReturnURL=" + Utils.RelativeWebRoot + "admin/";
     }
+
+    List<Category> categories = new List<Category>();
+    categories = Category.ApplicableCategories;
 %>
 <!DOCTYPE html>
 <html>
@@ -37,18 +40,33 @@
     <link href="01-homepage/css/styles.css" rel="stylesheet">
 
     <link href="01-homepage/css/responsive.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-64082429-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-64082429-4');
+    </script>
+
 </head>
 <body class="<%=Resources.labels.LangDirection %>">
 
     <form runat="Server">
+        <!--- required script -->
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/jquery-3.1.1.min.js")%>"></script>
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/tether.min.js")%>"></script>
+        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/bootstrap.js")%>"></script>
 
         <header>
 
             <div class="top-menu">
 
                 <ul class="left-area welcome-area">
-                    <li class="hello-blog">Hello nice people, welcome to my blog</li>
-                    <li><a href="mailto:hieuxinhe94@gmail.com">hieuxinhe94@gmail.com</a></li>
+                    <li class="hello-blog">Welcome to my blog, my friends. Let's see my stories</li>
+                    <li><a href="mailto:hieuxinhe94@gmail.com">hieuxinhe94(@)gmail.com</a></li>
                 </ul>
                 <!-- left-area -->
 
@@ -63,11 +81,10 @@
                     <!-- src-area -->
 
                     <ul class="social-icons">
-                        <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+                        <li><a href="fb.com/hieuxinhe94"><i class="ion-social-facebook-outline"></i></a></li>
+                        <li><a href="twitter.com/hieuxinhe"><i class="ion-social-twitter-outline"></i></a></li>
+                        <li><a href="instagram.com/p_hieu94"><i class="ion-social-instagram-outline"></i></a></li>
+                        
                     </ul>
                     <!-- right-area -->
 
@@ -88,25 +105,45 @@
                 <div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 
                 <ul class="main-menu visible-on-click" id="main-menu">
-                    <li class="drop-down"><a href="#!">Technial series<i class="ion-ios-arrow-down"></i></a>
 
-                        <ul class="drop-down-menu">
-                            <li><a href="#">Tips</a></li>
-                            <li><a href="#">Coding</a></li>
-                            <li class="drop-down"><a href="#!">Programing <i class="ion-ios-arrow-right"></i></a>
-                                <ul class="drop-down-menu drop-down-inner">
-                                    <li><a href="#">C#</a></li>
-                                    <li><a href="#">Python</a></li>
-                                     <li><a href="#">Java</a></li>
-                                    <li><a href="#">JS</a></li>
+                    <%foreach (var c in Category.ApplicableParentCategories)
+                        {
+                            bool hasNestedCategories = (c.childCategories != null && c.childCategories.Count > 0);
+                    %>
+                    <li <%if (hasNestedCategories)
+                        {%>class="drop-down"
+                        <%} %>><a href="<%=(Utils.ApplicationRelativeWebRoot)%>?categoryid=<%=c.Id %>"><%=c.Title %>
+                            <% if (hasNestedCategories)
+                                {%><i class="ion-ios-arrow-down"></i> <%}%></a>
+
+                        <% if (hasNestedCategories)
+                            {%>
+                        <ul class="drop-down-menu drop-down-inner">
+                            <% foreach (var c2 in c.childCategories)
+                                {%>
+                            <%hasNestedCategories = (c2.childCategories != null && c2.childCategories.Count > 0); %>
+
+                            <li <%if (hasNestedCategories)
+                                {%>class="drop-down"
+                                <%} %>><a href="<%=(Utils.ApplicationRelativeWebRoot)%>?categoryid=<%=c2.Id %>"><%=c2.Title %>
+                                    <% if (hasNestedCategories)
+                                        {%><i class="ion-ios-arrow-down"></i><%}%></a>
+                                <% if (hasNestedCategories)
+                                    {%>
+                                <ul class="drop-down-menu">
+                                    <% foreach (var c3 in c2.childCategories)
+                                        {%>
+                                    <li class="drop-down"><a href="<%=(Utils.ApplicationRelativeWebRoot)%>?categoryid=<%=c3.Id %>"><%=c3.Title %></a></li>
+                                    <%} %>
                                 </ul>
+                                <%} %>
                             </li>
+                            <%} %>
                         </ul>
 
+                        <%} %>
                     </li>
-                    <li><a href="#"> My life- my colors</a></li>
-
-                    <li><a href="#">Contact</a></li>
+                    <%}%>
                 </ul>
                 <!-- main-menu -->
 
@@ -119,7 +156,7 @@
         <!-- START CONTENT -->
         <section class="blog-area">
             <div class="container">
-                <div class="row" style="    margin-top: 20px;">
+                <div class="row" style="margin-top: 20px;">
 
                     <asp:ContentPlaceHolder ID="cphBody" runat="server" />
 
@@ -146,14 +183,17 @@
             <!-- container -->
 
             <ul class="instagram">
+
+                <%string[] imgSrcs = new string[] { }; %>
+                <% foreach (var instaPost in Post.GetPostsByCategory("INSTAGRAM"))
+                    {%>
+                <%imgSrcs = Post.FindAllImgWithRegex(instaPost.Content);  %>
+                <% foreach (var image in imgSrcs)
+                    {%>
                 <li><a href="#">
-                    <img src="/images/instragram-1-300x400.jpg" alt="Instagram Image"></a></li>
-                <li><a href="#">
-                    <img src="/images/instragram-2-300x400.jpg" alt="Instagram Image"></a></li>
-                <li><a href="#">
-                    <img src="/images/instragram-4-300x400.jpg" alt="Instagram Image"></a></li>
-                <li><a href="#">
-                    <img src="/images/instragram-5-300x400.jpg" alt="Instagram Image"></a></li>
+                    <img src="<%=image %>" alt="Instagram Image"></a></li>
+                <%}%>
+                <%}%>
             </ul>
         </section>
         <!-- END FOOTER -->
@@ -193,10 +233,6 @@
 
         <i class="goup fa fa-chevron-up"></i>
         <!-- SCIPTS -->
-
-        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/jquery-3.1.1.min.js")%>"></script>
-        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/tether.min.js")%>"></script>
-        <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/bootstrap.js")%>"></script>
         <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/layerslider.js")%>"></script>
         <script src="<%=(Utils.ApplicationRelativeWebRoot + "Custom/Themes/" + BlogSettings.Instance.Theme + "/common-js/scripts.js")%>"></script>
 

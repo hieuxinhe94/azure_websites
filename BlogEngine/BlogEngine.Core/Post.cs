@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Net.Mail;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Web;
 
     using BlogEngine.Core.Data.Models;
@@ -19,6 +20,8 @@
     [Serializable]
     public class Post : BusinessBase<Post, Guid>, IComparable<Post>, IPublishable
     {
+
+
         #region Constants and Fields
 
         /// <summary>
@@ -286,7 +289,7 @@
                 }
 
                 postsAcrossAllBlogs.Sort();
-                
+
                 // do not call AddRelations(). that will change the Next/Previous properties
                 // to point to posts in other blogs, which leads to the Next / Previous
                 // posts pointing to posts in other blog instances when viewing a single post
@@ -348,6 +351,35 @@
 
                 return blogPosts;
             }
+        }
+
+        public static string FindFirstImgWithRegex(string content)
+        {
+            var regx = new Regex("<img\\s+src=\"(?<1>.*?)\"");
+
+            var m = regx.Match(content);
+
+            if (m.Success)
+            {
+                return m.Groups[1].Value;
+            }
+
+            return null;
+        }
+        public static string[] FindAllImgWithRegex(string content)
+        {
+            var regx = new Regex("<img\\s+src=\"(?<1>.*?)\"");
+
+            var m = regx.Matches(content);
+
+            if (m != null)
+            {
+                return  m.Cast<Match>()
+                .Select(t => t.Groups[1].Value)
+                .ToArray();
+            }
+
+            return new string[] { };
         }
 
         /// <summary>
@@ -719,6 +751,26 @@
             }
         }
 
+        public static string FirstImgSrcFromContent(string content)
+        {
+            int idx = content.IndexOf("<img src=");
+            if (idx > 0)
+            {
+                try
+                {
+                    idx = idx + 10;
+                    var idxEnd = content.IndexOf("\"", idx);
+                    if (idxEnd > idx)
+                    {
+                        var len = idxEnd - idx;
+                        return content.Substring(idx, len);
+                    }
+                }
+                catch (Exception) { return ""; }
+            }
+            return "";
+
+        }
         #endregion
 
         #region Comment Properties
@@ -931,6 +983,11 @@
             return Posts.Find(p => p.Id == id);
         }
 
+        public static List<Post> GetLastestPost()
+        {
+            return Posts.Where(t => t.IsPublished).OrderBy(p => p.DateCreated).Distinct().Take(3).ToList();
+        }
+
         /// <summary>
         /// Returns all posts written by the specified author.
         /// </summary>
@@ -984,6 +1041,12 @@
         {
             var cat = Category.GetCategory(categoryId, Blog.CurrentInstance.IsSiteAggregation);
             return GetPostsByCategory(cat);
+        }
+
+        public static List<Post> GetPostsByCategory(string name)
+        {
+            var posts = Posts.Where(t => t.Categories.ToList().Select(c => c.Title).Contains(name)).ToList();
+            return posts;
         }
 
         /// <summary>
@@ -1359,7 +1422,7 @@
                 this.DataUpdate();
             }
 
-            this.OnCommentRemoved(comment);  
+            this.OnCommentRemoved(comment);
         }
 
         /// <summary>
@@ -1556,7 +1619,7 @@
             {
                 var e = new CancelEventArgs();
                 this.OnPublishing(e);
-                if (e.Cancel) 
+                if (e.Cancel)
                 {
                     this.isPublished = false;
                 }
@@ -1613,7 +1676,7 @@
             try
             {
                 var isOldPublished = BlogService.SelectPost(Id).IsPublished;
-                if(isPublished && !isOldPublished && !isDeleted)
+                if (isPublished && !isOldPublished && !isDeleted)
                 {
                     updateAndPublish = true;
                 }
@@ -1967,7 +2030,7 @@
         /// <returns>True if unique</returns>
         private static bool IsUniqueSlug(string slug, Guid postId)
         {
-            return Post.ApplicablePosts.Where(p => p.slug != null && p.slug.ToLower() == slug.ToLower() 
+            return Post.ApplicablePosts.Where(p => p.slug != null && p.slug.ToLower() == slug.ToLower()
                 && p.Id != postId).FirstOrDefault() == null ? true : false;
         }
 

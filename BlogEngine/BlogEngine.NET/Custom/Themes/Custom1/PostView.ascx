@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" EnableViewState="false" Inherits="BlogEngine.Core.Web.Controls.PostViewBase" %>
 <%@ Import Namespace="BlogEngine.Core" %>
+
 <%
 
     var singlePost = Location == ServingLocation.SinglePost;
@@ -31,14 +32,39 @@
 
     var postImagePosition = "[CUSTOMFIELD|THEME|Standard|Post Thumbnail position|top/]";
 
+    bool isPrivatePosts = false;
 
+    if (postCategory.Contains("MY"))
+    {
+        isPrivatePosts = true;
+    }
 %>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.3&appId=865343476902215"></script>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Warning!</h4>
+            </div>
+            <div class="modal-body">
+                <p>This content is only shown for my close friends, please come back to read another blog posts if you were not.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="goto:" id="btn">OK</button>
+            </div>
+        </div>
 
+    </div>
+</div>
 
 <% if (!singlePost)
     { %>
-<div class="blog-posts">
+<div class="blog-posts">
     <div class="single-post" id="post<%=Index %>">
         <div class="image-wrapper">
             <% if (postFirstImage.Length > 1)
@@ -52,9 +78,9 @@
                 <a class="btn caegory-btn" href="<%=authorUrl %>"><b><%=authorName %></b> </a>
             </div>
             <ul class="right-area social-icons">
-                <li><a href="#"><i class="ion-android-share-alt"></i>Shareee</a></li>
-                <li><a href="#"><i class="ion-android-favorite-outline"></i>03</a></li>
-                <li><a href="#"><i class="ion-android-textsms"></i>06</a></li>
+                <li><a href="#"><i class="ion-android-share-alt"></i>Share</a></li>
+                <li><a href="#"><i class="ion-android-favorite-outline"></i>-</a></li>
+                <li><a href="#"><i class="ion-android-textsms"></i>-</a></li>
             </ul>
         </div>
         <p class="date"><em><%=postDate %></em></p>
@@ -63,7 +89,7 @@
         <a class="btn read-more-btn" href="<%=postUrl %>"><b>READ MORE</b></a>
     </div>
 </div>
-     
+
 <%} %>
 
 <% else
@@ -84,22 +110,22 @@
                 </div>
                 <ul class="right-area social-icons">
                     <li><a href="#"><i class="ion-android-share-alt"></i>Share</a></li>
-                    <li><a href="#"><i class="ion-android-favorite-outline"></i>03</a></li>
-                    <li><a href="#"><i class="ion-android-textsms"></i>06</a></li>
+                    <li><a href="#"><i class="ion-android-favorite-outline"></i>-</a></li>
+                    <li><a href="#"><i class="ion-android-textsms"></i>-</a></li>
                 </ul>
-                 <p class="date"><em><%=postDate %></em></p>
+                <p class="date"><em><%=postDate %></em></p>
             </div>
-           
+
             <h3 class="title"><a href="#"><b class="light-color"><%=postTitle %></b></a></h3>
 
             <asp:PlaceHolder ID="BodyContent" runat="server" />
         </div>
     </div>
 
-    <footer class="post-footer">
+<%--    <footer class="post-footer">
         <%=postTags %>
         <%=postAdminLinks %>
-    </footer>
+    </footer>--%>
 
     <script type="application/ld+json">
     {
@@ -133,4 +159,10 @@
 </div>
 <!-- col-lg-4 -->
 <%} %>
+
+<%if (isPrivatePosts && !singlePost)
+    {%>
+<script>        $("#myModal").modal();</script>
+<%} %>
+
  

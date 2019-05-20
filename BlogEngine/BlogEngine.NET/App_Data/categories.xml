@@ -1,4 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <categories>
-    <category id="19770e74-9ec9-4cde-b2ab-e5051aaaf348" description="Posts about my adventures with BlogEngine.NET" parent="">BlogEngine.NET</category>
+    <category id="d371c984-1ba1-451d-961b-25c3b0951ff9" description="" parent="">INSTAGRAM</category>
+    <category id="93eb5681-ea5a-42d1-8bab-769e820f7ebf" description="" parent="">My life my colors</category>
+    <category id="1f3e51b0-51f4-40cd-aed5-a670d4486264" description="DO NOT DELETE" parent="">SLIDES</category>
+    <category id="9a1ac911-5c38-448e-b113-3e0a03df4d9e" description="" parent="">Technical series</category>
+    <category id="f37cad5c-58d8-4f98-b1a6-644fed7a631a" description="" parent="9a1ac911-5c38-448e-b113-3e0a03df4d9e">Coding</category>
+    <category id="81ee65c5-9862-4a11-b8ba-8d417ee57b72" description="" parent="9a1ac911-5c38-448e-b113-3e0a03df4d9e">Microservices</category>
+    <category id="78a15452-7bb9-46b6-9093-8af44029b722" description="" parent="9a1ac911-5c38-448e-b113-3e0a03df4d9e">Tips</category>
 </categories>

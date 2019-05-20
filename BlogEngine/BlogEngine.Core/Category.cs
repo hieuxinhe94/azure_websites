@@ -15,6 +15,8 @@
     {
         #region Constants and Fields
 
+        private static string[] SpecialCategoryKeys = new string[] { "SLIDES", "INSTAGRAM" };
+
         /// <summary>
         ///     The sync root.
         /// </summary>
@@ -40,6 +42,7 @@
         /// </summary>
         private string title;
 
+        public List<Category> childCategories = new List<Category>();
         #endregion
 
         #region Constructors and Destructors
@@ -114,7 +117,7 @@
                         {
                             categories[blog.Id] = blogCategories = BlogService.FillCategories(blog);
 
-                            if(blogCategories != null)
+                            if (blogCategories != null)
                                 blogCategories.Sort();
                         }
                     }
@@ -184,6 +187,46 @@
                     return Categories;
             }
         }
+
+        public static List<Post> SliderPostByCategory
+        {
+            get
+            {
+                List<Post> sliderPost = Post.GetPostsByCategory("SLIDES");
+
+
+                return sliderPost;
+            }
+        }
+
+        public static List<Category> ApplicableParentCategories
+        {
+            get
+            {
+                var ret = Categories.Where(t => t.Parent == null && !SpecialCategoryKeys.Contains(t.Title)).ToList();
+
+                foreach (var item in ret)
+                {
+                    item.childCategories = GetChildsCategory(item.Id);
+
+                    if (item.childCategories != null)
+                    {
+                        foreach (var item2 in item.childCategories)
+                        {
+                            item2.childCategories = GetChildsCategory(item2.Id);
+                        }
+                    }
+                }
+
+                return ret;
+            }
+        }
+
+        private static List<Category> GetChildsCategory(Guid id)
+        {
+            return Categories.Where(t => t.Parent != null && t.Parent.Value == id).ToList();
+        }
+
 
         /// <summary>
         ///     Gets the absolute link to the page displaying all posts for this category.

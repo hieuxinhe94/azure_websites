@@ -2,56 +2,17 @@
 <%@ Import Namespace="BlogEngine.Core" %>
 
 <div style="clear:both"></div>
-<div class="comments-area">
-    <% if (CommentCounter > 0)
-        { %>
-   <%-- <h3 id="comment" class="well-global-title">
-        <%=Resources.labels.comments %> (<%=CommentCounter%>)
-        <a id="commenttoggle" style="float: right; width: 20px; height: 20px; border: 1px solid #ccc; text-decoration: none; text-align: center" href="javascript:toggle_visibility('commentlist', 'commenttoggle');">-</a>
-    </h3>--%>
-    <%} %>
+
 
     <asp:PlaceHolder runat="server" ID="phComments" />
 
-</div>
-
 <asp:PlaceHolder runat="server" ID="phTrckbacks"></asp:PlaceHolder>
 
-<div class="leave-comment-area">
-    <div class="leave-comment">
-        <div class="row">
+    
         <asp:PlaceHolder runat="Server" ID="phAddComment">
-            <div id="comment-form">
-                <img src="<%=Utils.RelativeWebRoot %>Content/images/blog/ajax-loader.gif" width="24" height="24" alt="Saving the comment" style="display: none" id="ajaxLoader" />
-                <span id="status"></span>
-                <asp:PlaceHolder runat="server" ID="phCommentForm"></asp:PlaceHolder>
-                <% if (NestingSupported)
-                    { %>
-                <asp:HiddenField runat="Server" ID="hiddenReplyTo" />
-                <p id="cancelReply" style="display: none;">
-                    <a href="javascript:void(0);" onclick="BlogEngine.cancelReply();"><%=Resources.labels.cancelReply %></a>
-                </p>
-                <%} %>
- 
-            </div>
-
-            <script type="text/javascript">
-                BlogEngine.comments.flagImage = BlogEngine.$("imgFlag");
-                BlogEngine.comments.contentBox = BlogEngine.$("txtContent");
-                BlogEngine.comments.moderation = <%=BlogSettings.Instance.EnableCommentsModeration.ToString().ToLowerInvariant() %>;
-                BlogEngine.comments.checkName = <%=(!Security.IsAuthenticated).ToString().ToLowerInvariant() %>;
-                BlogEngine.comments.postAuthor = "<%=Post.Author %>";
-                BlogEngine.comments.nameBox = BlogEngine.$("txtName");
-                BlogEngine.comments.emailBox = BlogEngine.$("txtEmail");
-                BlogEngine.comments.websiteBox = BlogEngine.$("txtWebsite");
-                BlogEngine.comments.countryDropDown = BlogEngine.$("ddlCountry");
-                BlogEngine.comments.controlId = '<%=UniqueID %>';
-                BlogEngine.comments.replyToId = BlogEngine.$("<%=hiddenReplyTo.ClientID %>");
-            </script>
+            <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="5"></div>
         </asp:PlaceHolder>
-            </div><!-- row -->
-    </div>
-    <!-- leave-comment -->
+          
 
 </div>
 <!-- comments-area -->
